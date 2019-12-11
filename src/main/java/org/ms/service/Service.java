@@ -1,16 +1,27 @@
 package org.ms.service;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.Optional;
 
-@RestController("/ville")
+import org.ms.service.dto.ApiService;
+import org.ms.service.dto.DocumentDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.OptBoolean;
+
+@RestController
 public class Service {
-  
-	
-	private 
-	
-	@RequestMapping(value="/ListVilleParCode",method=RequestMethod.GET)
-	
+	@Autowired
+	private ApiService ApiService;
+	@PostMapping("/documents")
+	 public Optional<String> postDocument(@RequestPart MultipartFile[] fichiers) {
+			Optional<String> value =ApiService.getPersonnesAssurees(fichiers);
+	        return value;
+	    }
 	
 }
